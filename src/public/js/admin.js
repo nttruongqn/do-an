@@ -1,6 +1,6 @@
-const PHONE_REG =
+const PHONE_REG1 =
   /((0[2|3|4|5|6|7|8|9]|01[2|6|8|9])+([0-9]{8})|(84[2|3|4|5|6|7|8|9]|841[2|6|8|9])+([0-9]{8}))\b/g;
-const EMAIL_REG =
+const EMAIL_REG1 =
   /[a-zA-Z][a-zA-Z0-9_\.]{1,32}@[a-z0-9]{2,}(\.[a-z0-9]{2,4}){1,2}/g;
 
 
@@ -99,7 +99,7 @@ function checkRequiredDoctor(markdownIntroDoctor,markdownJDD) {
   }
 
    if ($("#email").val()) {
-     let isValid = $("#email").val().match(EMAIL_REG);
+     let isValid = $("#email").val().match(EMAIL_REG1);
      if (isValid) {
        $("#email").removeClass("is-invalid");
      } else {
@@ -192,7 +192,7 @@ function checkRequiredSupporter(markdownIntroSupporter) {
     $("#phone").removeClass("is-invalid");
   }
    if ($("#email").val()) {
-     let isValid = $("#email").val().match(EMAIL_REG);
+     let isValid = $("#email").val().match(EMAIL_REG1);
      if (isValid) {
        $("#email").removeClass("is-invalid");
      } else {
@@ -1363,7 +1363,7 @@ function handleCreatePostNormal(formData) {
     },
   });
 }
-
+  
 function showPostsForSupporter() {
   let currentPage = 1;
   let total = $("#paginationForPost").data("total");
@@ -1531,6 +1531,8 @@ function createScheduleByDoctor(scheduleArr) {
       success: function (data) {
         if (data.status === 1) {
           alertify.success("Thêm một cuộc hẹn thành công");
+           window.location.href = `${window.location.origin}/doctor/manage/schedule`;
+
         }
       },
       error: function (error) {
@@ -1693,6 +1695,7 @@ function loadNewPatientsForSupporter() {
     url: `${window.location.origin}/supporter/get-patients-for-tabs`,
     method: "POST",
     success: function (data) {
+      console.log(data)
       let countNew = data.object.newPatients.length;
       let countPending = data.object.pendingPatients.length;
       let countConfirmed = data.object.confirmedPatients.length;
@@ -2104,6 +2107,7 @@ function handleBtnViewHistory() {
         method: "POST",
         data: { patientId: patientId },
         success: function (data) {
+          console.log(data)
           $("#contentHistory").empty();
 
           let html = "";
@@ -2115,12 +2119,8 @@ function handleBtnViewHistory() {
                                   log.content
                                 }">
                             </div>
-                            <div class="col-3">
-                                <input type="text"  class="form-control" id="personDone" value="${
-                                  log.supporterName
-                                }">
-                            </div>
-                            <div class="col-3">
+                           
+                            <div class="col-6">
                                 <input type="text"  class="form-control" id="timeDone" value="${convertStringToDateClient(
                                   log.createdAt
                                 )} ">
@@ -2266,7 +2266,7 @@ function handleSendFormsForPatient() {
         $(`.fa-exclamation-circle[data-patient-id=${data.patient.id}]`)
           .removeClass("fa-exclamation-circle")
           .addClass("fa-check-circle");
-        alertify.success("Sending remedies succeeds");
+        alertify.success("Gởi hóa đơn thành công");
       },
       error: function (error) {
         alertify.error("Đã xảy ra lỗi, vui lòng thử lại sau!");

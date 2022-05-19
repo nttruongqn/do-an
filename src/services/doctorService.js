@@ -208,6 +208,26 @@ let getDoctorById = (id) => {
     try {
       let doctor = await db.User.findOne({
         where: { id: id, roleId: 2 },
+        include: [
+          {
+           model: db.Doctor_User,
+           include:[ {
+            model: db.Clinic,
+            attributes: ["id", "name", "address"],
+          },
+          {
+            model: db.Allcode,
+            as: "priceTypeData",
+          },
+          {
+            model: db.Allcode,
+            as: "provinceTypeData",
+          },
+
+           ]
+          },
+         
+        ],
       });
       resolve(doctor);
     } catch (e) {

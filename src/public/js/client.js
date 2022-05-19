@@ -20,12 +20,14 @@ function specializationGetScheduleDoctorByDate() {
         url: `${window.location.origin}/doctor/get-schedule-doctor-by-date`,
         data: { date: date, doctorId: doctorId },
         success: function (data) {
-          console.log(data);
+          console.log('data',data);
 
           $(`#div-schedule-${doctorId}`).html("");
           $(`#div-more-info-${doctorId}`).html("");
+          $('.list-sche-extra').empty();
           let html = "";
           let moreInfo = "";
+          
           if (data.message.length > 0) {
             data.message.forEach((schedule, index) => {
               if (schedule.isDisable === false) {
@@ -44,9 +46,10 @@ function specializationGetScheduleDoctorByDate() {
                                   
                                 </div>
                             </div>
+                                             
                         `;
               }
-
+         
               if (
                 index === data.message.length - 1 &&
                 schedule.isDisable === true
@@ -56,14 +59,7 @@ function specializationGetScheduleDoctorByDate() {
                             </div>`;
               }
             });
-            moreInfo = `
-                        <div class="d-flex flex-column">
-                                              <div class="s-l-i-item-sche-add no-bt">
-                                <span>Chọn <i class="fas fa-mouse-pointer"></i> và đặt (Phí đặt lịch
-                                    0đ)</span>
-                            </div>
-                         </div>
-                    `;
+          
           } else {
             html = `
                             <div class="no-schedule" style=" font: 14px/1.5 'Montserrat'">
@@ -73,13 +69,37 @@ function specializationGetScheduleDoctorByDate() {
                                             </b>. Vui lòng chọn lịch khám tiếp theo.
                                     </div>
                     `;
-            moreInfo = "";
+         
           }
+             if (data.message.length > 0) {
 
+               moreInfo = `  <div class="s-l-i-item-sche-add">
+                                            <span>Chọn <i class="fas fa-mouse-pointer"></i> và đặt (Phí đặt lịch
+                                                0đ)</span>
+                                        </div>
+                                        <div class="sche-address">
+                
+                                            <h6>ĐỊA CHỈ KHÁM</h6>
+                
+                                            <span>
+                                                ${data.doctor.Doctor_User.Clinic.name}
+                                            </span> <br>
+                                            <span>
+                                                ${data.doctor.Doctor_User.Clinic.address}
+                                            </span>
+                
+                                        </div>
+                                        <div class="sche-price">
+                                            <h6>Giá Khám:</h6>
+                                            <span>
+                                                ${data.doctor.Doctor_User.priceTypeData.value} đ
+                                            </span>
+                                        </div>`; 
+
+                                            }
           $(`#div-schedule-${doctorId}`).append(html);
-          if (moreInfo !== "") {
-            $(`#div-more-info-${doctorId}`).append(moreInfo);
-          }
+          $(".list-sche-extra").append(moreInfo);
+         
         },
         error: function (error) {
           alertify.error("Đã xảy ra lỗi, vui lòng thử lại sau!!");

@@ -222,14 +222,14 @@ let createNewPatient = (data) => {
           );
           if (!isEmailSend) {
             console.log(
-              "An error occurs when sending an email to: " + patient.email
+              "Đã xảy ra lỗi khi gửi email tới: " + patient.email
             );
             console.log(isEmailSend);
           }
 
           resolve(patient);
         } else {
-          resolve("Max booking");
+          resolve("Lượt đặt lịch đã vượt quá giới hạn");
         }
       });
     } catch (e) {
