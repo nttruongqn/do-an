@@ -41,9 +41,9 @@
 
             <div class="form-group">
                 <% if(clinic.image) { %>
-                    <img class="img-preview-clinic-create" id="image-preview" src="/images/clinics/<%= clinic.image %>">
+                    <img class="img-preview-clinic-create" id="image-preview" style="width: 100%;" src="/images/clinics/<%= clinic.image %> ">
                 <% } else { %>
-                    <img class="img-preview-clinic-create d-none" id="image-preview">
+                    <img class="img-preview-clinic-create d-none" id="image-preview" style="width: 100%;">
                 <% } %>
             </div>
 

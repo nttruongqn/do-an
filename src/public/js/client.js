@@ -77,7 +77,7 @@ function specializationGetScheduleDoctorByDate() {
           }
              if (data.message.length > 0) {
 
-               html += `  
+               html += `
                <div class="list-sche-extra" id="list-sche-extra">
                <div class="s-l-i-item-sche-add">
                                             <span>Chọn <i class="fas fa-mouse-pointer"></i> và đặt (Phí đặt lịch
@@ -1027,7 +1027,10 @@ function handleChangeProvince() {
             });
 
             if (doctor.schedules.length > 0) {
-              html += `<div class="list-sche-extra" id="list-sche-extra">
+             
+              html += `
+              
+              <div class="list-sche-extra" id="list-sche-extra">
     <div class="s-l-i-item-sche-add">
         <span>Chọn <i class="fas fa-mouse-pointer"></i> và đặt (Phí đặt lịch
             0đ)</span>

@@ -280,6 +280,7 @@ let getInfoStatistical = (month) => {
         let doctorObject = _.maxBy(bestDoctorIdArr, function (o) {
           return o.patientId.length;
         });
+        console.log(doctorObject)
         bestDoctor = await db.User.findOne({
           where: {
             id: doctorObject.doctorId,

@@ -68,7 +68,7 @@
                             </div>
                             
                             <div class="col-lg-6 col-sm-12 spe-row-two">
-                                <div class="s-l-i-item-sche">
+                                <div class="s-l-i-item-sche" style="display:flex;flex-direction: column;">
                                     <div class="sche-select" >
                                         <select name=""
                                     id="day-book-spe" class="doctor-schedule-spe"  data-doctor="<%= doctor.User.id %>">
@@ -107,7 +107,7 @@
                                                     </a>
                                                     </button>
                                         </div>
-                                                
+                                        
                                         <%}%>
                                         <% if( index===doctor.getDataValue('schedules').length - 1 && x.getDataValue("isDisable")===true){ %>
                                             <span style="font-size: 14px;">
@@ -119,7 +119,8 @@
                                         <%})%>
 
                                         <% if(doctor.getDataValue('schedules').length> 0) { %>
-                                        <div class="list-sche-extra" id="list-sche-extra">
+                                            <div class="list-sche-extra" id="list-sche-extra">
+                                           
                                             <div class="s-l-i-item-sche-add">
                                                 <span>Chọn <i class="fas fa-mouse-pointer"></i> và đặt (Phí đặt lịch
                                                     0đ)</span>

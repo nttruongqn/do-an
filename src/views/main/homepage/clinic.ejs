@@ -126,6 +126,33 @@
                 
                 
                                                                     <%})%>
+                                                                    <% if(doctor.getDataValue('schedules').length> 0){ %>
+                                                                          <div class="list-sche-extra" id="list-sche-extra">
+
+                                                                        <div class="s-l-i-item-sche-add">
+                                                                            <span>Chọn <i class="fas fa-mouse-pointer"></i> và đặt (Phí đặt lịch
+                                                                                0đ)</span>
+                                                                        </div>
+                                                                        <div class="sche-address">
+                                                                        
+                                                                            <h6>ĐỊA CHỈ KHÁM</h6>
+                                                                    
+                                                                            <span>
+                                                                                <%=clinic.name%>
+                                                                            </span> <br>
+                                                                            <span>
+                                                                                <%=clinic.address%>
+                                                                            </span>
+                                                                    
+                                                                        </div>
+                                                                        <div class="sche-price">
+                                                                            <h6>Giá Khám:</h6>
+                                                                            <span>
+                                                                                <%=doctor.priceTypeData.value%> đ
+                                                                            </span>
+                                                                        </div>
+                                                                        </div>
+                                                                        <% } %>
                 
                 
                                     </div>
@@ -133,31 +160,7 @@
                                     
                                     </div>
                 
-                                    <% if(doctor.getDataValue('schedules').length> 0){ %>
-                
-                                        <div class="s-l-i-item-sche-add">
-                                            <span>Chọn <i class="fas fa-mouse-pointer"></i> và đặt (Phí đặt lịch
-                                                0đ)</span>
-                                        </div>
-                                        <div class="sche-address">
-                
-                                            <h6>ĐỊA CHỈ KHÁM</h6>
-                
-                                            <span>
-                                                <%=clinic.name%>
-                                            </span> <br>
-                                            <span>
-                                                <%=clinic.address%>
-                                            </span>
-                
-                                        </div>
-                                        <div class="sche-price">
-                                            <h6>Giá Khám:</h6>
-                                            <span>
-                                                <%=doctor.priceTypeData.value%> đ
-                                            </span>
-                                        </div>
-                                        <% } %>
+                                   
                                 </div>
                             </div>
                         </div>
@@ -166,7 +169,7 @@
                 </div>
             </div>
         </div>
-
+<!-- 
 <script>
     var map, searchManager;
     function GetMap() {
@@ -211,7 +214,7 @@
             searchManager.geocode(searchRequest);
         }
     }
-    </script>
+    </script> -->
     </div>
 <%- include('includes/expand-navbar-hsd.ejs') %>
 <%- include('includes/footer.ejs') %>
