@@ -224,6 +224,11 @@ $(document).ready(function () {
             $("#banner-search-input-title").css("display", "none");
           }
         });
+
+        $('.en-link.gohome').click(function (e) { 
+                window.location.href = `${window.location.origin}/`;
+          
+        }) ;
   
         
 });
