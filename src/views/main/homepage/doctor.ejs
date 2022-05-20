@@ -46,7 +46,7 @@
                         <div class="s-l-i-item-sche br">
                             <div class="sche-select">
                                 <select name=""
-                                id="day-book-spe" class="doctor-schedule-spe" data-doctor="<%= doctor.id %>">
+                                id="day-book-spe" class="doctor-schedule-spe1" data-doctor="<%= doctor.id %>">
                                     <% sevenDaySchedule.forEach(function(day) { %>
                                         <option value="<%= day %>">
                                             <%= day %>
@@ -165,9 +165,7 @@
                         </a>
                     </li>
                     <%})%>
-                        <!-- <li class="hide-all-item a-h"><a href="">
-                            <span>Xem tất cả</span>
-                        </a></li> -->
+                        <li class="hide-all-item a-h" id="show-all-sp" style="cursor:pointer">Xem tất cả</li>
 
             </ul>
 

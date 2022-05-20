@@ -84,7 +84,7 @@
                                         <span><i class="fa-solid fa-calendar-days"></i></span>
                                         <span>Lịch Khám</span><br>
                                     </div>
-                                    <div class="btn-list-sche" id="div-schedule-<%= doctor.User.id %>">
+                                       <div class="btn-list-sche" id="div-schedule-<%= doctor.User.id %>">
                                         <% if(doctor.getDataValue('schedules').length===0){ %>
                                             <div class="no-schedule" style="font-size:14px;">
                                                "<%= doctor.User.name %>" không có cuộc hẹn vào
@@ -117,41 +117,44 @@
 
 
                                         <%})%>
+
+                                        <% if(doctor.getDataValue('schedules').length> 0) { %>
+                                        <div class="list-sche-extra" id="list-sche-extra">
+                                            <div class="s-l-i-item-sche-add">
+                                                <span>Chọn <i class="fas fa-mouse-pointer"></i> và đặt (Phí đặt lịch
+                                                    0đ)</span>
+                                            </div>
+                                            <div class="sche-address">
+                                        
+                                                <h6>ĐỊA CHỈ KHÁM</h6>
+                                        
+                                                <span>
+                                                    <%=doctor.Clinic.name%>
+                                                </span> <br>
+                                                <span>
+                                                    <%=doctor.Clinic.address%>
+                                                </span>
+                                        
+                                            </div>
+                                            <div class="sche-price">
+                                                <h6>Giá Khám:</h6>
+                                                <span>
+                                                    <%=doctor.priceTypeData.value%> đ
+                                                </span>
+                                            </div>
+                                        
+                                        </div>
+                                        
+                                        <% } %>
                                       
                                         
-                                    </div>
-                                    <div class="list-sche-extra">
+                                       </div>
+                                  
+                                    <!-- <div class="list-sche-extra">
 
-                                    </div>
+                                    </div> -->
 
-                                    <% if(doctor.getDataValue('schedules').length> 0) { %>
-                                    <div class="list-sche-extra" id="list-sche-extra">
-                                        <div class="s-l-i-item-sche-add">
-                                            <span>Chọn <i class="fas fa-mouse-pointer"></i> và đặt (Phí đặt lịch
-                                                0đ)</span>
-                                        </div>
-                                        <div class="sche-address">
-                                        
-                                            <h6>ĐỊA CHỈ KHÁM</h6>
-                                        
-                                            <span>
-                                                <%=doctor.Clinic.name%>
-                                            </span> <br>
-                                            <span>
-                                                <%=doctor.Clinic.address%>
-                                            </span>
-                                        
-                                        </div>
-                                        <div class="sche-price">
-                                            <h6>Giá Khám:</h6>
-                                            <span>
-                                                <%=doctor.priceTypeData.value%> đ
-                                            </span>
-                                        </div>
-
-                                    </div>
-
-                                    <% } %>
+                                 
                                 </div>
                             
                             </div>

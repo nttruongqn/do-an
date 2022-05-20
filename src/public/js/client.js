@@ -23,9 +23,11 @@ function specializationGetScheduleDoctorByDate() {
           console.log('data',data);
 
           $(`#div-schedule-${doctorId}`).html("");
-          $(`#div-more-info-${doctorId}`).html("");
+          // $(`#div-more-info-${doctorId}`).html("");
           $('.list-sche-extra').empty();
+          $("#schedule-addr").empty();
           let html = "";
+          let html1 = "";
           let moreInfo = "";
           
           if (data.message.length > 0) {
@@ -34,8 +36,8 @@ function specializationGetScheduleDoctorByDate() {
                 html += `
                           <div id="spe-btn-modal-${schedule.id}" data-doctor-id="${schedule.doctorId}" data-date="${schedule.date}"
                                  data-time="${schedule.time}"
-                                 class="btn-list-flex text-decoration-none show-modal-at-clinic-page">
-                                <div class="doctor-time">
+                                 class="btn-list-flex text">
+                              
                                  <button class="b-ls-item">
                                  <a href="/get-book-page/${schedule.id}">
                                          <span>
@@ -54,26 +56,30 @@ function specializationGetScheduleDoctorByDate() {
                 index === data.message.length - 1 &&
                 schedule.isDisable === true
               ) {
-                html += `<div>
+                html += `<span>
                                 Không có kế hoạch khám bệnh đã lên lịch nào trong khung thời gian hiện tại.
-                            </div>`;
+                            </span>`;
               }
             });
           
           } else {
-            html = `
-                            <div class="no-schedule" style=" font: 14px/1.5 'Montserrat'">
-                                      ${data.doctor.name}" không có cuộc hẹn vào
-                                            <b>
-                                                ${value}
-                                            </b>. Vui lòng chọn lịch khám tiếp theo.
-                                    </div>
+            html += `
+        
+                             <div class="no-schedule" style="font-size:14px;">
+                                               "${data.doctor.name}" không có cuộc hẹn vào
+                                                    <b>
+                                                       ${value}
+                                                    </b>. Vui lòng chọn lịch khám tiếp theo.
+                                            </div>
+
                     `;
          
           }
              if (data.message.length > 0) {
 
-               moreInfo = `  <div class="s-l-i-item-sche-add">
+               html += `  
+               <div class="list-sche-extra" id="list-sche-extra">
+               <div class="s-l-i-item-sche-add">
                                             <span>Chọn <i class="fas fa-mouse-pointer"></i> và đặt (Phí đặt lịch
                                                 0đ)</span>
                                         </div>
@@ -94,11 +100,13 @@ function specializationGetScheduleDoctorByDate() {
                                             <span>
                                                 ${data.doctor.Doctor_User.priceTypeData.value} đ
                                             </span>
-                                        </div>`; 
+                                        </div>
+                                      </div>`; 
 
                                             }
           $(`#div-schedule-${doctorId}`).append(html);
-          $(".list-sche-extra").append(moreInfo);
+          // $(".list-sche-extra").append(moreInfo);
+           
          
         },
         error: function (error) {
@@ -108,6 +116,118 @@ function specializationGetScheduleDoctorByDate() {
       });
     });
 }
+
+
+
+function getScheduleDoctorByDate() {
+  $(document)
+    .off("change", ".doctor-schedule-spe1")
+    .on("change", ".doctor-schedule-spe1", function (event) {
+   
+      let value = $(this).val();
+      console.log(value);
+      let arrSplit = value.split("-");
+      console.log(arrSplit);
+      let date = arrSplit[1].trim();
+      console.log(date);
+      let doctorId = $(this).data("doctor");
+
+      $.ajax({
+        method: "POST",
+        url: `${window.location.origin}/doctor/get-schedule-doctor-by-date`,
+        data: { date: date, doctorId: doctorId },
+        success: function (data) {
+          console.log("data", data);
+
+          $(`#div-schedule-${doctorId}`).html("");
+          // $(`#div-more-info-${doctorId}`).html("");
+          $(".list-sche-extra").empty();
+          $("#schedule-addr").empty();
+          let html = "";
+          let html1 = "";
+          let moreInfo = "";
+
+          if (data.message.length > 0) {
+            data.message.forEach((schedule, index) => {
+              if (schedule.isDisable === false) {
+                html += `
+                          <div id="spe-btn-modal-${schedule.id}" data-doctor-id="${schedule.doctorId}" data-date="${schedule.date}"
+                                 data-time="${schedule.time}"
+                                 class="btn-list-flex text">
+                              
+                                 <button class="b-ls-item">
+                                 <a href="/get-book-page/${schedule.id}">
+                                         <span>
+                                            ${schedule.time}
+                                        </span>
+                                        </a>
+                                 </button>
+                                  
+                                </div>
+                            </div>
+                                             
+                        `;
+              }
+
+              if (
+                index === data.message.length - 1 &&
+                schedule.isDisable === true
+              ) {
+                html += `<span>
+                                Không có kế hoạch khám bệnh đã lên lịch nào trong khung thời gian hiện tại.
+                            </span>`;
+              }
+            });
+          } else {
+            html += `
+        
+                             <div class="no-schedule" style="font-size:14px;">
+                                               "${data.doctor.name}" không có cuộc hẹn vào
+                                                    <b>
+                                                       ${value}
+                                                    </b>. Vui lòng chọn lịch khám tiếp theo.
+                                            </div>
+
+                    `;
+          }
+          // if (data.message.length > 0) {
+          //   html += `  
+          //      <div class="list-sche-extra" id="list-sche-extra">
+          //      <div class="s-l-i-item-sche-add">
+          //                                   <span>Chọn <i class="fas fa-mouse-pointer"></i> và đặt (Phí đặt lịch
+          //                                       0đ)</span>
+          //                               </div>
+          //                               <div class="sche-address">
+                
+          //                                   <h6>ĐỊA CHỈ KHÁM</h6>
+                
+          //                                   <span>
+          //                                       ${data.doctor.Doctor_User.Clinic.name}
+          //                                   </span> <br>
+          //                                   <span>
+          //                                       ${data.doctor.Doctor_User.Clinic.address}
+          //                                   </span>
+                
+          //                               </div>
+          //                               <div class="sche-price">
+          //                                   <h6>Giá Khám:</h6>
+          //                                   <span>
+          //                                       ${data.doctor.Doctor_User.priceTypeData.value} đ
+          //                                   </span>
+          //                               </div>
+          //                             </div>`;
+          // }
+          $(`#div-schedule-${doctorId}`).append(html);
+          // $(".list-sche-extra").append(moreInfo);
+        },
+        error: function (error) {
+          alertify.error("Đã xảy ra lỗi, vui lòng thử lại sau!!");
+          console.log(error);
+        },
+      });
+    });
+}
+
 
 function showModalAllSpecializations() {
   $(".show-all-specializations").on("click", function (e) {
@@ -955,6 +1075,12 @@ function handleChangeProvince() {
 }
 
 $(document).ready(function (e) {
+$('#show-all-sp').click(function (e) { 
+  e.preventDefault();
+  window.location.href = `${window.location.origin}/all-specializations`;
+
+  
+});
   specializationGetScheduleDoctorByDate();
   showModalAllSpecializations();
   showModalAllClinics();
@@ -969,4 +1095,5 @@ $(document).ready(function (e) {
   handleSearchHomepage();
   createNewFeedback();
   handleChangeProvince();
+  getScheduleDoctorByDate();
 });
