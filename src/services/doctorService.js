@@ -685,6 +685,17 @@ let getDoctorBySchedule = (id) => {
         include: [
           {
             model: db.User,
+            include: [
+              {
+                model: db.Doctor_User,
+                include: [
+                  {
+                    model: db.Allcode,
+                    as: "priceTypeData",
+                  },
+                ],
+              },
+            ],
           },
         ],
       });

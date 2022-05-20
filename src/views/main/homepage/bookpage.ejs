@@ -42,7 +42,7 @@
                         <form id="form-patient-info">
                             <div class="form-group-price">
                                 <input type="radio" name="price" id="" checked>
-                                <label for="">Giá khám <br><span>450000 đ</span></label>
+                                <label for="">Giá khám <br><span><%=data.User.Doctor_User.priceTypeData.value%>đ</span></label>
 
                             </div>
                             <div class="form-group">
@@ -145,7 +145,7 @@
                                 <div class="fg-price-top">
                                     <div class="fpt first">
                                         <span>Giá khám</span>
-                                        <span>400.000 đ</span>
+                                        <span><%=data.User.Doctor_User.priceTypeData.value%> đ</span>
                                     </div>
                                     <div class="fpt second">
                                         <span>Phí đặt lịch </span>
@@ -155,7 +155,7 @@
                                 <div class="fg-price-bottom">
                                     <div class="fpt first">
                                         <span>Tổng cộng</span>
-                                        <span style="color:#fe3834; font-weight:300;"><b>400.000 đ</b></span>
+                                        <span style="color:#fe3834; font-weight:300;"><b><%=data.User.Doctor_User.priceTypeData.value%> đ</b></span>
                                     </div>
 
                                 </div>
